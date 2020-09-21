@@ -1,48 +1,53 @@
-# graphB software 
+#**DataLab12.github.io/graphB**
 
-## About 
-name of the algorithm, **graphB** is short for **graph B**alancing. graphB implements algorithm that can run stand-alone or distributed to compute metrics for nodes and edges from graph frustration cloud, as outlined in this [paper](https://arxiv.org/abs/2009.07776).
+## History 
+The project and collaboration of Jelena Tešić and Lucas Rusnak started in November 2017 and the idea of graphB 1.0 starting taking shape in the summer of 2018. Joshua Mitchell, Master student at Texas State led the initial graphB implementation. The code and concept grew over time, as the code grew and multuple students from Data Lab contributed to the codebase. Eric Hull took the ownership and the lead in 2019, and this is the released version. 
 
-* faculty: Lucas Rusnak, Math and [Jelena Tešić](jtesic.github.io], Computer Science
-* current students: Eric Hull, Maria Tomasso, Blane Rhodes
-* former students: Joshua Mitchell, Connie Angeley, Benjamin Bond
+# Implementation Notes 
+Python pipeline is designed to reuse existing computations (connected component, spanning trees, balancing results).  It consists of 3 steps: pre-process, process, and post-process 
 
-## Abstract 
-Attitudinal Network Graphs (ANG) are network graphs where edges capture an expressed opinion: two vertices connected by an edge can be agreeable (positive) or antagonistic (negative). Measure of consensus in attitudinal graph reflects how easy or difficult consensus can be reached that is acceptable by everyone. Frustration index is one such measure as it determines the distance of a network from a state of total structural balance. In this paper, we propose to measure the consensus in the graph by expanding the notion of frustration index to a frustration cloud, a collection of nearest balanced states for a given network. The frustration cloud resolves the consensus problem with minimal sentiment disruption, taking all possible consensus views over the entire network into consideration. A frustration cloud based approach removes the brittleness of traditional network graph analysis, as it allows one to examine the consensus on entire graph. A spanning-tree-based balancing algorithm captures the variations of balanced states and global consensus of the network, and enables us to measure vertex influence on consensus and strength of its expressed attitudes. The proposed algorithm provides a parsimonious account of the differences between strong and weak statuses and influences of a vertex in a large network, as demonstrated on sample attitudinal network graphs constructed from social and survey data. We show that the proposed method accurately models the alliance network, provides discriminant features for community discovery, successfully predicts administrator election outcome consistent with real election outcomes, and provides deeper analytic insights into ANG outcome analysis by pinpointing influential vertices and anomalous decisions.
+## Pre-Processsing 
+* Pre-processing step transforms data from Raw_Data to Input_Data folder of the collection: any input graph is transformed into (*_users.csv,*_edges.csv) file tuple 
+   *  _edges.csv file as line entry of <from>, <to>, <vote>
+   * corresponding _users.csv file that assigns all nodes unique IDs reflected in _edges file 
+* Next step is the computation of largest connected component: 
+   * the edges file is converted to .CSR matrix format, and then to NetworkX graph format using 
+            ```networkx.from_scipy_sparse_matrix()``` 
+   * This implementation of graphB ignores 0 edges, takes into account only positive or negative edges. 
+   * Largest connected component of input graph is calculated using NetworkX method 
+            ```networkx.connected_component_subgraphs()```
+	 * Largest CC is then converted back to CSR format and written to 
+	        ```Input_Data/*h5 networkx.to_scipy_sparse_matrix()```
 
-## Implementation 
+## Processing 
 
-Python pipeline is designed to reuse existing computations (connected component, spanning trees, balancing results).  It consists of 3 steps: pre-process, process, and post-process. 
-* graphB Implementation [notes](GRAPHB.md)
+### Tree Generation 
 
-## Setup 
+There are three different methods for tree generation. Trees can be generated and saved separately.
+  ```Input_Data/*.h5``` is loaded back into NetworkX using ```networkx.from_scipy_sparse_matrix()```
+1. **random spanning tree**: random weights are assigned to all of the edges; Kruskal’s algorithm is run on the random weighted graph
+   ```networkx.minimum_spanning_tree()```, spanning tree generated from Kruskal’s is taken as a subgraph from the original graph to maintain the original weights using 
+   ```networkx.edge_subgraph()```, 
+   and tree is converted to NetworkX graph format and saved. 
+2.  **breadth-first tree**: readth trees are made starting at highest degree node in the graph and then descending after,
+	```scipy.sparse.csgraph.breadth_first_tree()```, and converted to NetworkX graph format
+	```networkx.from_scipy_sparse_matrix()```
+2. **depth-first tree**: depth trees are made starting at highest degree node in the graph and descending, usig
+    ```scipy.sparse.csgraph.depth_first_tree()```, and and converted to NetworkX graph format
+	```networkx.from_scipy_sparse_matrix()```
 
-graphB should be cloned at the same level as sample data repository. 
-*graphB setup [notes](SETUP.md)
+### Balancing Algorithm
 
-In local directory <DIR>, check out 2 repositories: 
-Checkout https://github.com/DataLab12/graphB
-Checkout https://github.com/DataLab12/data-highland_tribes
+For each tree, the algorithm finds all cycles in the graph that selected spanning trees forms with edges not in spanning tree.
+* If the cycles have a product of -1, the edge sign (edge not in spanning tree) is changed.
+* Result is balanced graph (each fundamental cycle in the graph is positive). 
+* Negative edges are removed, and largest remaining connected component is found. 
+* The information on node membership to largest cut, and change of sign of edge is saved as Data/*/*/*/*.h5 file 
+  
+The process is repeated for each sampled spanning tree 
+  
+## Post-Processing 
 
-## Dry Run ##
-
-1. Install Anaconda 
-
-2. Open terminal in graphB repo (where it is locally):
-```
->>cd <_DIR>/graphB
->>conda env create -f win_env.yml //if Windows
->>conda env create -f linux_env.yml //if Linux
->>conda activate cam
-```
-4. Setup configs folder 
-* copy folder **configs_template**, rename it to **configs** 
-* repo data-highland_tribes should be at the same level at graphB/
-* Example run for [data-highland_tribes](https://git.txstate.edu/DataLab/data-highland_tribes) 
-* configs file options and hierarchy [explanation](configs_template/README.md)
-```
->>python run.py
->>python run.py 0
-```
-5. Result Analysis 
-* To view results go to data_highland-tribes/Output_Data/
+* Output_Data folder contains statistics computed from all sampled trees and resulted balanced states 
+  * status is computed by counting the number of times the vertex was in largest connected component out of all the spanning trees/balanced graphs generated.
+ 
