@@ -13,9 +13,9 @@ Attitudinal Network Graphs (ANG) are network graphs where edges capture an expre
 ## Implementation and Setup 
 
 Python pipeline is designed to reuse existing computations (connected component, spanning trees, balancing results).  It consists of 3 steps: pre-process, process, and post-process. 
-* graphB Implementation [notes](src/README.md)
-graphB should be cloned at the same level as sample data repository. 
-*graphB setup [notes](SETUP.md)
+  * graphB introduction and dry run [notes](README.md)
+  * graphB Implementation [notes](graphB/README.md)
+  * graphB Setup [notes](graphB/SETUP.md)
 
 
 ## Dry Run ##

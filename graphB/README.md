@@ -1,7 +1,10 @@
 #**DataLab12.github.io/graphB**
 
 ## History 
-The project and collaboration of Jelena Tešić and Lucas Rusnak started in November 2017 and the idea of graphB 1.0 starting taking shape in the summer of 2018. Joshua Mitchell, Master student at Texas State led the initial graphB implementation. The code and concept grew over time, as the code grew and multuple students from Data Lab contributed to the codebase. Eric Hull took the ownership and the lead in 2019, and this is the released version. 
+The project and collaboration of Jelena Tešić and Lucas Rusnak started in November 2017 and graphB code was a result of multiple contributions from [Data Lab](DataLab12.github.io) current, and former students.  
+* Joshua Mitchell, Master student at Texas State led the initial graphB implementation, graphB 1.0.
+* Eric Hull, undergraduate researcher led the subconsequent improvements for this graphB 2.0 release
+* significant contributions to the code improvement were made by Ryan Zamora, Maria Tomasso, Benjamin Bond, and Connie Angeley 
 
 # Implementation Notes 
 Python pipeline is designed to reuse existing computations (connected component, spanning trees, balancing results).  It consists of 3 steps: pre-process, process, and post-process 

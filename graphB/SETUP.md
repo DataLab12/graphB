@@ -1,4 +1,3 @@
-## Dry Run ##
 # SETUP
 1. Install Anaconda 
 
@@ -11,7 +10,7 @@
 ```
 4. Setup configs folder 
 
-* repo [data-test](data-test) should be at the same level as src folder in graphB 
+* repo [data-test](../data-test) should be at the same level as graphB code folder 
 * configs file options and hierarchy [explanation](src/configs/README.md)
 ```
 >>python run.py
