@@ -16,6 +16,8 @@ Python pipeline is designed to reuse existing computations (connected component,
   * graphB introduction and dry run [notes](README.md)
   * graphB Implementation [notes](graphB/README.md)
   * graphB Setup [notes](graphB/SETUP.md)
+  
+Sample dataset is [here](data-test/)
 
 
 ## Dry Run ##
