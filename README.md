@@ -3,7 +3,7 @@
 ## About 
 **graphB** is short for **graph B**alancing. graphB implements algorithm that can run stand-alone or distributed to compute metrics for nodes and edges from graph frustration cloud, as outlined in this [paper](https://arxiv.org/abs/2009.07776).
 
-* faculty: Lucas Rusnak, Math and [Jelena Tešić](jtesic.github.io], Computer Science
+* faculty: Lucas Rusnak, Math and [Jelena Tešić](jtesic.github.io), Computer Science
 * current students: Eric Hull, Maria Tomasso, Blane Rhodes
 * former students: Joshua Mitchell, Connie Angeley, Benjamin Bond
 
