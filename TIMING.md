@@ -1,8 +1,10 @@
-# Timing Results and Discussion
+# Timing Experiment
 
-### Summary of Datasets
+This report summarizes timing performance of the code 
+Author: [Eric Hull](https://github.com/hullo-eric), undergraduate researcher in Data Lab 2020. 
 
-Timing data was generated for five different datasets:
+## Datasets
+
 
 | Dataset | # of Nodes | # of Edges | Link to Source |
 | --------- | --------- | ---------- | ---------- | 
@@ -12,7 +14,7 @@ Timing data was generated for five different datasets:
 | Amazon Musical Instruments Reviews (5-Core) | 2329 | 10261 | [UCSD](http://jmcauley.ucsd.edu/data/amazon/links.html) |
 | Highland Tribes Alliance Data | 16 | 116 | [UCINET](http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/ucidata.htm#gama) |  
 
-## Overall Runtime Comparison Between Apache Spark and Serial Processing on TXState's LEAP HPC  
+## Runtime Comparison Between Apache Spark and Serial Processing on TXState's LEAP HPC  
 
 **1000 spanning trees were generated for each experiment**  
 **Spark/Slurm settings:**
@@ -37,8 +39,8 @@ Timing data was generated for five different datasets:
 [Reasoning derived from this article](https://spoddutur.github.io/spark-notes/distribution_of_executors_cores_and_memory_for_spark_application.html)  
 [LEAP specs here](https://doit.txstate.edu/rc/leap.html)
 
-![Total Runtime in Seconds](https://github.com/hullo-eric/DataLab_Images/blob/main/total_runtime.PNG?raw=true)
-![Spark Speedup](https://github.com/hullo-eric/DataLab_Images/blob/main/spark_speedup.PNG?raw=true)
+![Total Runtime in Seconds](total_runtime.png)
+![Spark Speedup](spark_speedup.png)
 
 | Dataset | Parallelization Type | Tree Type | Total Runtime | Total Preprocess Time | Total Process Time | Total Postprocess Time | Spark Speedup |
 | ---------------- | ---------------- | --------------- | --------------- | --------------- | --------------- | --------------- | --------------- |
@@ -55,7 +57,7 @@ Timing data was generated for five different datasets:
 | Highland Tribes | Serial | Breadth | 0 days 00:01:56.62 | 0 days 00:00:00.12 | 0 days 00:01:35.49 | 0 days 00:00:21.02 | N/A |
 | Highland Tribes | Spark | Breadth | 0 days 00:00:26.86 | 0 days 00:00:00.07 |	0 days 00:00:13.11 | 0 days 00:00:13.68 | 4.34 |  
 
-### Speedup Summary  
+### Summary  
 
 * Average overall speedup using spark configs above was very good, at **12.51**. The only portion of the code that utililzed spark parallelization was the tree generation and balancing portion (process). This was done because it was the biggest bottleneck in overall time, and the process could be parallelized simply. Note the serial Total Process Time vs. Total Preprocess or Total Postprocess time, for any of the datasets above. The large majority of the time was spent in the Process step. 
 * Improvements could be made by parallelzing Preprocess and Postprocess, though the gains would not be as significant since they are already a small portion of the total runtime. It should be noted that as graph size scales, preprocess does become a significant time factor and would definitely need to be improved for graphs over 100K edges.

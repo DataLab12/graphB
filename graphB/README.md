@@ -1,9 +1,14 @@
+# About graphB
 
-# graphB
+**graphB** algorithmm, short for **graph B**alancing, implements graph frustration cloud and resulting graph measures, as presented in this [paper](https://arxiv.org/abs/2009.07776).  
 
-**graphB** algorithmm, short for **graph B**alancing, implements graph frustration cloud and resulting graph measures, as presented in this [paper](https://arxiv.org/abs/2009.07776).
 
-Data science pipeline consists of three steps: pre-process, process, and post-process, as explained in graphB [notes](GRAPHB.md). Detailed *setup* [notes](SETUP.md) 
+The graphB project is led by  Texas State faculty [Jelena Tešić](jtesic.github.io) and [Lucas Rusnak](https://www.math.txstate.edu/about/people/faculty/rusnak.html). First public release og graphB software was summer 2020 (ver 1.0 development led by graduate student [Joshua Mitchell](https://lelon.io/), and second and final release was Dec 2020, led by undergraduate student [Eric Hull](https://github.com/hullo-eric).  
+
+Detailed setup and notes are in graphB [notebook](GRAPHB.md). 
+
+Martin Burtscher's team scaled the discovery and balancing of fundamental cycles in 2020, and allowed us to extend the frustration cloud concept to larger social graphs, see new implementation [here](https://userweb.cs.txstate.edu/~burtscher/research/graphB/).
+
 
 
 ## Quick setup
