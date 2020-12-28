@@ -1,7 +1,8 @@
 # Timing Experiment
 
-This report summarizes timing performance of the code 
-Author: [Eric Hull](https://github.com/hullo-eric), undergraduate researcher in Data Lab 2020. 
+This report summarizes timing performance of the graphB code. 
+
+**Author**: [Eric Hull](https://github.com/hullo-eric), undergraduate researcher in Data Lab 2020. 
 
 ## Datasets
 
