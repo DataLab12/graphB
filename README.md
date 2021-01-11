@@ -26,8 +26,8 @@ Checkout https://github.com/DataLab12/graphB
 3. Open terminal in graphB repo (where it is locally):
 ```
 >>cd <_DIR>/graphB/graphB
->>conda env create -f win_env.yml //if Windows
->>conda env create -f linux_env.yml //if Linux
+>>conda env create -f env/win_env.yml //if Windows
+>>conda env create -f env/linux_env.yml //if Linux
 >>conda activate cam
 ```
 4. Setup configs folder (optional - currently set for data-test)
