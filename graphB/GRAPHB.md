@@ -17,11 +17,11 @@
 
       Enter the following commands in terminal (linux) or in an anaconda prompt (windows):
 ```
-      >> conda env create -f  conda_environments/win_env.yml // windows  
-      >> conda env create -f conda_environments/linux_env.yml // linux  
+      >> conda env create -f  env/win_env.yml // windows  
+      >> conda env create -f  env/linux_env.yml // linux  
       >> conda init --all   
-      >> conda activate cam    
-      >> pip install --ignore-installed pyyaml  
+      >> conda activate graphB    
+      >> pip install --ignore-installed pyyaml  (optional)
 ```    
       **Close the terminal to apply changes.**  
       

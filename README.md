@@ -14,6 +14,11 @@ The graphB project is led by  Texas State faculty [Jelena Tešić](jtesic.github
 
 **Abstract** Attitudinal Network Graphs (ANG) are network graphs where edges capture an expressed opinion: two vertices connected by an edge can be agreeable (positive) or antagonistic (negative). Measure of consensus in attitudinal graph reflects how easy or difficult consensus can be reached that is acceptable by everyone. Frustration index is one such measure as it determines the distance of a network from a state of total structural balance. In this paper, we propose to measure the consensus in the graph by expanding the notion of frustration index to a frustration cloud, a collection of nearest balanced states for a given network. The frustration cloud resolves the consensus problem with minimal sentiment disruption, taking all possible consensus views over the entire network into consideration. A frustration cloud based approach removes the brittleness of traditional network graph analysis, as it allows one to examine the consensus on entire graph. A spanning-tree-based balancing algorithm captures the variations of balanced states and global consensus of the network, and enables us to measure vertex influence on consensus and strength of its expressed attitudes. The proposed algorithm provides a parsimonious account of the differences between strong and weak statuses and influences of a vertex in a large network, as demonstrated on sample attitudinal network graphs constructed from social and survey data. We show that the proposed method accurately models the alliance network, provides discriminant features for community discovery, successfully predicts administrator election outcome consistent with real election outcomes, and provides deeper analytic insights into ANG outcome analysis by pinpointing influential vertices and anomalous decisions.  [arXiv](https://arxiv.org/abs/2009.07776).
 
+
+## Timing Analysis of the Code
+
+Detailed performance analysis of the code on several datasets [TIMING](TIMING.md)
+
 ## Implementation and Setup Notes 
 
 1. Install Anaconda. Make sure all packages are installed.  If Anaconda is installed follow the steps below: 
@@ -74,8 +79,5 @@ done
 ```
 5. Result Analysis 
 * To view results go to [data-test/Output_Data/](data-test/Output_Data/) folder. 
-
-[Data Lab @ TXST](DataLab12.github.io)
-
 
 [Data Lab @ TXST](DataLab12.github.io)
