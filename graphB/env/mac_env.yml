@@ -14,13 +14,11 @@ dependencies:
   - idna
   - libarchive
   - libedit
-  - libffi
-  - libgcc-ng
-  - libstdcxx-ng                    
+  - libffi 
+  - libgcc 
   - libxml2
   - lz4-c
   - lzo
-  - ncurses       
   - openssl
   - pip
   - pycosat

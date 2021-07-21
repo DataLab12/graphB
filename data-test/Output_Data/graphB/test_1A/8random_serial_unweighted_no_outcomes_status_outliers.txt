@@ -1,0 +1,2 @@
+Number of Outliers: 1
+Outliers: 2
