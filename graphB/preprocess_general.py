@@ -64,7 +64,7 @@ def get_full_unsym_csr_adj_matrix_and_possibly_outcomes_from_csv(config_obj):
             datetime.now() - start_matrix,
             output_type,
         )
-        users_df = pd.read_csv(users_csv_path)
+        users_df = pd.read_csv(users_csv_path,)
     else:
         print(
             "Error creating matrices from edges and users files. Please check the paths and filenames and make sure they are correct."
@@ -85,21 +85,23 @@ def create_full_h5(config_obj):
     )  # returns a list of the connected components with each one given a label. i.e. 0,1,2, etc.
     print("number of connected components: ", num_connected_components)
     G = nx.from_scipy_sparse_matrix(csr_adj_matrix)
-    connected_comps = [
-        c for c in sorted(nx.connected_component_subgraphs(G), key=len, reverse=True)
-    ]
+    connected_comps=list(G.subgraph(c).copy() for c in nx.connected_components(G))
+
+    connected_comps = sorted(connected_comps,key=len, reverse=True)
+    #sorted(G.subgraph(c).copy() for c in connected_components(G), 
+
     comp_labels, counts = np.unique(labels, return_counts=True)
     dict_hist = dict(zip(comp_labels, counts))
     labels = order_components_descending(labels)
-    comp_labels, counts = np.unique(labels, return_counts=True)
-    dict_hist = dict(zip(comp_labels, counts))
-    if dict_hist[0] < config_obj["min_component_size"]:
-        print(
-            "**** Largest component is not as big as minimum component size specified in 0.yaml, no sym h5s were made. ****"
-        )
-    else:
-        print("Writing component 0")
-        write_full_h5(connected_comps[0], config_obj, 0, True, labels, users)
+    # comp_labels, counts = np.unique(labels, return_counts=True)
+    # dict_hist = dict(zip(comp_labels, counts))
+    # if dict_hist[0] < config_obj["min_component_size"]:
+    #    print(
+    #        "**** Largest component is not as big as minimum component size specified in 0.yaml, no sym h5s were made. ****"
+    #    )
+    # else:
+    print("Writing component 0")
+    write_full_h5(connected_comps[0], config_obj, 0, True, labels, users)
 
 
 def get_neighbors(vertex_number, graph_adj_matrix):
