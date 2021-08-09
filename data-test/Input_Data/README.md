@@ -34,11 +34,6 @@ Data source [link](http://snap.stanford.edu/data/index.html#signnets)
 
 | Amazon Ratings | Data             | No. vertices in Largest Connected Component | No. edges  in Largest Connected Component | No. cycles in Largest Connected Component |
 | :------------- | :--------------- |  ---------------: |  ---------------: | ---------------: | 
-| Digital Music	core5| [users](amazonDigitalMusic_core5_users.csv) and [edges](amazonDigitalMusic_core5_edges.csv) | 9,109 | 64,706 | 55,598 |
-| Instant Video	core5 |  [users](amazonVideo_core5_users.csv) and [edges](amazonVideo_core5_edges.csv) | 6,815 | 37,126 |	30,312 |
-| Musical Instruments core5 | [users](amazonMusicalInstruments_core5_users.csv) and [edges](amazonMusicalInstruments_core5_edges.csv) | 2,329	| 10,261 | 7,933 |
-
-
-soc-sign-epinions	119,130	704,267	585,138	3,558	5.9	841,372
-soc-sign-Slashdot090221	82,140	500,481	418,342	2,548	6.1	549,202
-wiki-Elec	7,539	112,058	104,520	1,079	14.9	114,040
+| soc-sign-epinions | [users](eopinions_all_edges.csv) and [edges](eopinions_all_edges.csv) | 119,130	| 704,267	| 585,138 |
+| soc-sign-Slashdot090221 |  [users](slashdot_all_users.csv) and [edges](slashdot_all_edges.csv) | 82,140	| 500,481	| 418,342 |
+| wiki-Elec | [users](wiki_breadthTiming_users.csv) and [edges](wiki_breadthTiming_edges.csv) | 7,539	| 112,058	| 104,520 |
