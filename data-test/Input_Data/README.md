@@ -3,8 +3,8 @@
 
 Data source: 
 
-| Amazon Ratings | data | # vertices  in largest CC | # edges  in largest CC | # cycles | graph max degree | graph avg degree | # total ratings |
-| --------| ------------------------- | ---------------------- | -------- | ---------------- | ---------------- | --------------------------- |
+| Amazon Ratings | Data | No. vertices  in largest CC | No. edges  in largest CC | No. cycles in largest CC | Graph max degree | Graph avg degree | No. total ratings |
+| :-------- | ------------------------- | ---------------------- | -------- | ---------------- | ---------------- | --------------------------- |
 | Baby	  | [users](Amazon_Baby_users.csv) and [edges]((Amazon_Baby_edges.csv) | 559,040 | 892,231 | 333,192 | 3,648 | 1.6 | 915,446 |
 | Digital Music	525,522	702,584	177,063	1,953	1.3	836,006
 Instant Video	433,702	572,834	139,133	12,633	1.3	583,993
