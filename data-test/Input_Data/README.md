@@ -5,10 +5,10 @@ Data source:
 
 | Amazon Ratings | Data | No. vertices in Largest Connected Component | No. edges  in Largest Connected Component | No. cycles in Largest Connected Component |
 | :------------- | :--- | --------------------------- | ------------------------ | ------------------------ | 
-| Baby 	  | [users](Amazon_Baby_users.csv) and [edges]((Amazon_Baby_edges.csv) | 559,040 | 892,231 | 333,192 |
-| Digital Music	| [users](Amazon_Music_users.csv) and [edges]((Amazon_Music_edges.csv) | 525,522	| 702,584	| 177,063	| 
+| Baby 	  | [users](Amazon_Baby_users.csv) and [edges](Amazon_Baby_edges.csv) | 559,040 | 892,231 | 333,192 |
+| Digital Music	| [users](Amazon_Music_users.csv) and [edges](Amazon_Music_edges.csv) | 525,522	| 702,584	| 177,063	| 
+| Instant Video	|  [users](Amazon_Music_users.csv) and [edges](Amazon_Music_edges.csv) | 433,702 | 572,834 | 139,133 |
 
-Instant Video	433,702	572,834	139,133	12,633	1.3	583,993
 Musical Instruments	355,507	457,140	101,634	3,523	1.3	500,176
 Amazon Reviews	# vertices  in largest CC	# edges  in largest CC	# cycles	max degree	avg degree	# reviews
 Digital Music core5	9,109	64,706	55,598	578	7.1	64,706
