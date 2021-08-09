@@ -1,6 +1,6 @@
 # Dataset Notations, Format, and Example
 
-| Underlining unsigned graph | ![Vertices](figures/Nodes.jpg) |  ![Edges](figures/Edges.jpg) |
+Underlining unsigned graph: ![Vertices](figures/Nodes.jpg) and ![Edges](figures/Edges.jpg)
 
 
 | Example    | Figure     |  Data     |
