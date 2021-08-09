@@ -1,8 +1,5 @@
 # Dataset Notations, Format, and Example
 
-Underlining unsigned graph: ![Vertices](figures/Nodes.jpg) and ![Edges](figures/Edges.jpg)
-
-
 | Example    | Figure     |  Data     |
 | -----------| ---------- | --------- |
 | Example 1A | ![Example 1A](figures/1A-signs.jpg) | [users](Input_Data/test1A_users.csv) and [edges](Input_Data/test1A_edges.csv) |
@@ -16,6 +13,8 @@ The Raw_Data directory will primarily consist of two types of csv files.
 * The users.csv file maps the Node_ID to the User_ID and may contain Labels. 
 * The edges.csv file consists of three columns. "From_Node_ID", "To_Node_ID", "Edge_Weight"
 * Note: No 0 Edge_Weight should be in edges.csv
+
+Underlining unsigned graph: ![Vertices](figures/Nodes.jpg) and ![Edges](figures/Edges.jpg)
 
 name1_name2_users.csv example without labels:  
  ``` 
