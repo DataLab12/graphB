@@ -4,9 +4,9 @@
 parallelism: serial #  choose between: spark, serial
 machine: current #  choose between: current, LEAP
 
-dataset: timing #  Corresponds to the name of the repository i.e. data-[dataset]
+dataset: test #  Corresponds to the name of the repository i.e. data-[dataset]
 data_subset_type: epinions #  Corresponds to the first label in edges and users naming. i.e. [data_subset_type]_[matrix_name]_edges.csv
-matrix_name: timing #  Corresponds to the second label in edges and users naming. i.e. [data_subset_type]_[matrix_name]_edges.csv
+matrix_name: all #  Corresponds to the second label in edges and users naming. i.e. [data_subset_type]_[matrix_name]_edges.csv
 component_no: 0 #  This option should always be left as 0 for this version. Trees will always be run on the largest connected component, a.k.a. component 0
 
 #######################################################################################################
@@ -24,7 +24,7 @@ tree_type: #  tree sampling options
   random: No
   breadth: Yes
   depth: No
-num_trees: 10 #  The number of trees you want to make
+num_trees: 100 #  The number of trees you want to make
 
 #######################################################################################################
 # POSTPROCESSING / ANALYSIS SETTINGS (Data --> Output Data):
