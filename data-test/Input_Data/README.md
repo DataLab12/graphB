@@ -3,8 +3,8 @@
 
 Data source: 
 
-| Amazon Ratings | Data           | No. vertices in Largest Connected Component | No. edges  in Largest Connected Component | No. cycles in Largest Connected Component |
-| :------------- | :--- |  ---------------: |  ---------------: | ---------------: | 
+| Amazon Ratings | Data             | No. vertices in Largest Connected Component | No. edges  in Largest Connected Component | No. cycles in Largest Connected Component |
+| :------------- | :--------------- |  ---------------: |  ---------------: | ---------------: | 
 | Patio, Lawn, and Garden | [users](Amazon_Garden_users.csv) and [edges](Amazon_Garden_edges.csv) | 735,815	| 939,679	| 203,865 |
 | Baby 	  | [users](Amazon_Baby_users.csv) and [edges](Amazon_Baby_edges.csv) | 559,040 | 892,231 | 333,192 |
 | Digital Music	| [users](Amazon_Music_users.csv) and [edges](Amazon_Music_edges.csv) | 525,522	| 702,584	| 177,063	| 
