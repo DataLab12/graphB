@@ -1,11 +1,6 @@
-# Dataset Example and Format
+# Dataset Notations, Format, and Example
 
-## Underlining unsigned graph
-
-![Vertices](figures/Nodes.jpg)   ![Edges](figures/Edges.jpg)
-
-## Example edge signs: 
-
+|Underlining unsigned graph | ![Vertices](figures/Nodes.jpg)   ![Edges](figures/Edges.jpg)
 | Example    | Figure     |  Data     |
 | -----------| ---------- | --------- |
 | Example 1A | ![Example 1A](figures/1A-signs.jpg) | [users](Input_Data/test1A_users.csv) and [edges](Input_Data/test1A_edges.csv) |
@@ -54,22 +49,15 @@ name1_name2_edges.csv example from survey data:
   ...
 ```
 
-## Input_Data   
+## Data   
 
-  * Requires Raw_Data
   * Before any analysis can be done, the raw data (csv) has to be converted into its matrix h5 format. 
-  * This is the Input Data step. For every connected component (CC) of your data above ~25 vertices, (ordered from highest to lowest, so 0.h5 is the highest CC of your data), there are two h5 files: 
-  * The symmetricized matrix
-  * The assymetric matrix.
-
-  * The symmetric matrix will be used to generate trees and balanced matrices. 
-  * The assymmetric matrix is used for degree analysis (i.e. in/out degree histograms) as part of Output Data.
-
-## Data
-
- * Requires Input_Data
- * When we refer to Data, we specifically mean h5 files containing balanced versions of a data set as well as the trees used to do perform the specific balancing. 
- * Once this data is generated, the files will not be overwritten.
+  * For every connected component (CC) of your data above x vertices, (ordered from highest to lowest, so 0.h5 is the highest CC of your data), there are two h5 files: 
+    * The symmetricized matrix - used for generate trees and balanced matrices. 
+    * The assymetric matrix - used for degree analysis (i.e. in/out degree histograms) as part of Output Data.
+   * Next, the code produces a set of h5 files containing balanced versions of a data set per spanning tree 
+     * as well as the trees used to do perform the specific balancing. 
+     * once this data is generated, the files will not be overwritten.
 
 
 ## Output_Data
