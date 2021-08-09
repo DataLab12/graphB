@@ -1,7 +1,13 @@
 
+# Input Datasets for graphB
+
+All datasets are pre-processed to an internal standard csv format
+* _users.csv - relates original vertex name to graphB ID
+* _edges.csv - signed edge information for each existing edge, and original edge qweight, if any  
+
 ## Amazon Ratings
 
-Data source: 
+Data source [link](https://jmcauley.ucsd.edu/data/amazon/)
 
 | Amazon Ratings | Data             | No. vertices in Largest Connected Component | No. edges  in Largest Connected Component | No. cycles in Largest Connected Component |
 | :------------- | :--------------- |  ---------------: |  ---------------: | ---------------: | 
