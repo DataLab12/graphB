@@ -1,12 +1,19 @@
-# Highland Tribes Dataset
+# Dataset Example and Format
 
-## Data Source
+## Underlining unsigned graph
 
-Highland Tribes Data [source](http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/ucidata.htm#gama)
+![Vertices](figures/Nodes.jpg)   ![Edges](figures/Edges.jpg)
 
-Sign Graph [image](https://www.researchgate.net/figure/The-tribal-groups-of-the-Eastern-Central-Highlands-of-New-Guinea-from-the-study-of-Read_fig1_220906703)
+## Example edge signs: 
 
-## Raw_Data
+| Example    | Figure     |  Data     |
+| -----------| ---------- | --------- |
+| Example 1A | ![Example 1A](figures/1A-signs.jpg) | [users](Input_Data/test1A_users.csv) and [edges](Input_Data/test1A_edges.csv) |
+| Example 2A | ![Example 2A](figures/2A-signs.jpg) | [users](Input_Data/test2A_users.csv) and [edges](Input_Data/test2A_edges.csv) |
+
+More reproducibility test data in [Input_Data](Input_Data/README.md) folder
+
+## Input_Data format 
 
 The Raw_Data directory will primarily consist of two types of csv files.
 * The users.csv file maps the Node_ID to the User_ID and may contain Labels. 
