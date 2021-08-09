@@ -3,9 +3,9 @@
 
 All datasets are pre-processed to an internal standard csv format
 * _users.csv - relates original vertex name to graphB ID
-* _edges.csv - signed edge information for each existing edge, and original edge qweight, if any  
+* _edges.csv - signed edge information for each existing edge, and original edge weight, if any  
 
-## Amazon Ratings
+## Amazon Product [Ratings](https://jmcauley.ucsd.edu/data/amazon/) Data
 
 Data source [link](https://jmcauley.ucsd.edu/data/amazon/)
 
@@ -17,11 +17,28 @@ Data source [link](https://jmcauley.ucsd.edu/data/amazon/)
 | Instant Video	|  [users](Amazon_Video_users.csv) and [edges](Amazon_Video_edges.csv) | 433,702 | 572,834 | 139,133 |
 | Musical Instruments | [users](Amazon_Instruments_users.csv) and [edges](Amazon_Instruments_edges.csv) | 355,507 | 457,140 | 101,634 |
 
-Amazon Reviews	# vertices  in largest CC	# edges  in largest CC	# cycles	max degree	avg degree	# reviews
-Digital Music core5	9,109	64,706	55,598	578	7.1	64,706
-Instant Video core5	6,815	37,126	30,312	455	5.4	37,126
-Musical Instruments core 5	2,329	10,261	7,933	163	4.4	10,621
-SNAP Signed Networks	# vertices in largest CC	# edges  in largest CC	# cycles	max degree	avg degree	# signed edges
+## Amazon Product [Reviews](https://jmcauley.ucsd.edu/data/amazon/) Data
+
+Data source [link](https://jmcauley.ucsd.edu/data/amazon/)
+
+| Amazon Ratings | Data             | No. vertices in Largest Connected Component | No. edges  in Largest Connected Component | No. cycles in Largest Connected Component |
+| :------------- | :--------------- |  ---------------: |  ---------------: | ---------------: | 
+| Digital Music	core5| [users](amazonDigitalMusic_core5_users.csv) and [edges](amazonDigitalMusic_core5_edges.csv) | 9,109 | 64,706 | 55,598 |
+| Instant Video	core5 |  [users](amazonVideo_core5_users.csv) and [edges](amazonVideo_core5_edges.csv) | 6,815 | 37,126 |	30,312 |
+| Musical Instruments core5 | [users](amazonMusicalInstruments_core5_users.csv) and [edges](amazonMusicalInstruments_core5_edges.csv) | 2,329	| 10,261 | 7,933 |
+
+
+## [SNAP](http://snap.stanford.edu/data/index.html#signnets) Signed Networks	Data
+
+Data source [link](http://snap.stanford.edu/data/index.html#signnets) 
+
+| Amazon Ratings | Data             | No. vertices in Largest Connected Component | No. edges  in Largest Connected Component | No. cycles in Largest Connected Component |
+| :------------- | :--------------- |  ---------------: |  ---------------: | ---------------: | 
+| Digital Music	core5| [users](amazonDigitalMusic_core5_users.csv) and [edges](amazonDigitalMusic_core5_edges.csv) | 9,109 | 64,706 | 55,598 |
+| Instant Video	core5 |  [users](amazonVideo_core5_users.csv) and [edges](amazonVideo_core5_edges.csv) | 6,815 | 37,126 |	30,312 |
+| Musical Instruments core5 | [users](amazonMusicalInstruments_core5_users.csv) and [edges](amazonMusicalInstruments_core5_edges.csv) | 2,329	| 10,261 | 7,933 |
+
+
 soc-sign-epinions	119,130	704,267	585,138	3,558	5.9	841,372
 soc-sign-Slashdot090221	82,140	500,481	418,342	2,548	6.1	549,202
 wiki-Elec	7,539	112,058	104,520	1,079	14.9	114,040
