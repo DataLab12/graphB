@@ -19,15 +19,8 @@ class Timer:
         if self.startTime is None:
             self.startTime = datetime.now()
             self.elapsedTime = None
-        else:
-            print("This timer has already been started.")
 
     def stop(self):
-        if self.startTime is None:
-            print("This timer hasn't been started yet.")
-#        elif self.stopTime is not None:
-#            print("This timer has already been stopped.")
-        else:
             self.stopTime = datetime.now()
             self.elapsedTime = self.stopTime - self.startTime
             self.allElapsedTimes.append(self.elapsedTime)
@@ -35,28 +28,13 @@ class Timer:
             self.stopTime = None
                
     def getElapsedTime(self):
-        if self.startTime is not None:
-            print("This timer is currently running and must be stopped first")
-        if self.stopTime is not None:
-            print("This timer hasn't been stopped")
-        else:
             return self.elapsedTime
 
     def getAverageTime(self):
-        if self.startTime is not None:
-            print("This timer is still running and must be stopped first")
-        elif self.stopTime is not None:
-            print("This timer hasn't been stopped")
-        else:
             sumTimes = reduce(lambda x, y: x + y, self.allElapsedTimes)
             return sumTimes/len(self.allElapsedTimes)
 
     def getSumTime(self):
-        if self.startTime is not None:
-            print("This timer is still running and must be stopped first")
-        elif self.stopTime is not None:
-            print("This timer hasn't been stopped")
-        else:
             sumTimes = reduce(lambda x, y: x + y, self.allElapsedTimes) 
             return sumTimes
             

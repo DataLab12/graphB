@@ -15,7 +15,7 @@ component_no: 0 #  This option should always be left as 0 for this version. Tree
 preprocess: Yes #  If the Input Data (i.e. full matrix h5) desired already exists, remake it.
 has_labels: No #  Does this dataset have labels or colors for each vertex?
 
-min_component_size: 100 #  The minimum number of vertices we will consider making a full h5 matrix for.
+min_component_size: 10 #  The minimum number of vertices we will consider making a full h5 matrix for.
 
 #######################################################################################################
 # PROCESSING / TREE CREATION SETTINGS (Input Data --> Data):

@@ -70,12 +70,12 @@ def parse_config_path(config_path):
 
 
 def set_output_location(config_obj, output_path):
-    if config_obj["machine"] == "current":
-        logging.basicConfig(filename=output_path, filemode="w", level=logging.DEBUG)
-        print("\nStarting to write timing logs to file at: ", output_path, "\n")
-    elif config_obj["machine"] == "LEAP":
-        print("\nStarting to write all output to file at: ", output_path, "\n")
-        sys.stdout = open(output_path, "w")
+    #if config_obj["machine"] == "current":
+    logging.basicConfig(filename=output_path, filemode="w", level=logging.DEBUG)
+        #print("\nStarting to write timing logs to file at: ", output_path, "\n")
+    #elif config_obj["machine"] == "LEAP":
+        #print("\nStarting to write all output to file at: ", output_path, "\n")
+    sys.stdout = open(output_path, "w")
 
 
 def execute_jobs_by_config_file_index(config_file_option):
@@ -84,44 +84,23 @@ def execute_jobs_by_config_file_index(config_file_option):
     set_output_location(config_obj, output_path)
     execute_jobs_by_config_file(config_obj, True)
 
-
 def execute_jobs_by_config_file(config_obj, index_run_flag):
     # jobID's: 0 means do it on current machine, None means don't do it (already done or not requested), any other positive integer means do it on LEAP
     if not index_run_flag:
         output_path = get_output_file_path(config_obj)
         set_output_location(config_obj, output_path)
-    print("******************** Starting Preprocessing Step  ******************** ")
     preprocess_jobID = submit_preprocess_job(config_obj)
-    print(
-        "******************** Finished Preprocessing Step (jobID: ",
-        preprocess_jobID,
-        "); Starting Process Step ******************** ",
-    )
     process_jobID = submit_process_job(config_obj, preprocess_jobID)
-    print(
-        "******************** Finished Processing Step (jobID: ",
-        process_jobID,
-        "); Starting Postprocess Step ********************** ",
-    )
     postprocess_jobID = submit_postprocess_job(config_obj, process_jobID)
-    print(
-        "******************** Finished Postprocessing Step (jobID: ",
-        postprocess_jobID,
-        "). Exiting. *******************************",
-    )
 
 
 if __name__ == "__main__":
+
     TimerManager.addTimer("global")
     TimerManager.startTimerX(0)
-
-    print("--------------------------------------")
-    print("Arguments: ", sys.argv)
+    
     if len(sys.argv) == 1:
         config_file_options_list = get_all_config_file_options()
-        print(
-            "No config file selected. List of config files you can use (pass the index as the first argument):"
-        )
         for index, config_file_option in enumerate(config_file_options_list):
             print(index, " ---> ", config_file_option)
         print()
@@ -129,19 +108,9 @@ if __name__ == "__main__":
     else:
         if str(sys.argv[1]).isdigit():
             config_file_option = int(sys.argv[1])
-            print(
-                "Integer detected as first run.py parameter: using config file corresponding to that index: ",
-                config_file_option,
-            )
             execute_jobs_by_config_file_index(config_file_option)
         else:
-            print(
-                "Integer not detected as first run.py parameter. Will assume it's a path: ",
-                str(sys.argv[1]),
-            )
-            print("Example path: configs/example1/regular/regular/0.yaml")
             config_path = str(sys.argv[1])
             config_obj = get_yaml_config_obj_by_path(config_path)
             execute_jobs_by_config_file(config_obj, False)
-
-    print("--------------------------------------")
+            

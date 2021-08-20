@@ -35,7 +35,7 @@ def get_balanced_file_list(config_obj, local_override=False):
         if f != ".DS_Store"
     ]
     balanced_file_list.sort()
-    print("Tree list Length: ", len(balanced_file_list))
+    #print("Tree list Length: ", len(balanced_file_list))
     return balanced_file_list
 
 
@@ -100,49 +100,49 @@ def postprocess_vertex_df(config_obj, dont_remake_override=False):
     file_tag = get_file_tag(config_obj)
     FULL_DF_PATH = output_folder + file_tag + "_vertex_df.pkl"
     vertex_df = None
-    print("-------- Entering Post-Process Vertex DF --------")
+    #print("-------- Entering Post-Process Vertex DF --------")
     if (
         not isfile(FULL_DF_PATH) or config_obj["postprocess"]
     ) and not dont_remake_override:
-        print("-------- Creating Vertex DF --------")
+        #print("-------- Creating Vertex DF --------")
         # if (it's not a file or we want to remake it) AND we're not calling this function from a plotting fn, table fn, etc...
         to_be_df_dict = None
         trees_list = get_balanced_file_list(config_obj, True)
         if parallelism == "parallel" or parallelism == "spark":
             num_cores = mp.cpu_count()
-            print(
-                "Creating vertex df (parallel: ",
-                num_cores,
-                " cores):",
-                dataset,
-                ", ",
-                data_subset_type,
-                ", ",
-                matrix_name,
-                ") ",
-            )
+            #print(
+            #    "Creating vertex df (parallel: ",
+            #    num_cores,
+            #    " cores):",
+            #    dataset,
+            #    ", ",
+            #    data_subset_type,
+            #    ", ",
+            #    matrix_name,
+            #    ") ",
+            #)
             vertex_df_start = datetime.now()
             df_tup_list = Parallel(n_jobs=num_cores)(
                 delayed(get_per_tree_vertex_dict_tup)(tree, config_obj)
                 for tree in trees_list
             )
             to_be_df_dict = {tup[0]: tup[1] for tup in df_tup_list}
-            print("Finished base, adding component and outcome columns.")
+            #print("Finished base, adding component and outcome columns.")
         elif parallelism == "serial":
-            print(
-                "Creating vertex df (serial):",
-                dataset,
-                ", ",
-                data_subset_type,
-                ", ",
-                matrix_name,
-                ") ",
-            )
+            #print(
+            #    "Creating vertex df (serial):",
+            #    dataset,
+            #    ", ",
+            #    data_subset_type,
+            #    ", ",
+            #    matrix_name,
+            #    ") ",
+            #)
             vertex_df_start = datetime.now()
             to_be_df_dict = {
                 tree: get_per_tree_vertex_dict(tree, config_obj) for tree in trees_list
             }
-            print("Finished base, adding component and outcome columns.")
+            #print("Finished base, adding component and outcome columns.")
         vertex_df = create_vertex_df_from_vertex_dict(
             to_be_df_dict, config_obj, trees_list, FULL_DF_PATH
         )
@@ -152,7 +152,7 @@ def postprocess_vertex_df(config_obj, dont_remake_override=False):
             output_type,
         )
     else:
-        print("-------- Reading Vertex DF --------")
+        #print("-------- Reading Vertex DF --------")
         vertex_df = pd.read_pickle(FULL_DF_PATH)
     return vertex_df
 
@@ -164,9 +164,7 @@ def get_users_map(config_obj):
         users_map_df = pd.read_csv(map_csv_path)
         ignore = False
     else:
-        print(
-            "No file in map_csv path. Ignore this if your users do not have any mapping."
-        )
+        #print("No file in map_csv path. Ignore this if your users do not have any mapping.")
         users_map_df = None
         ignore = True
     return users_map_df, ignore
@@ -175,7 +173,7 @@ def get_users_map(config_obj):
 def create_vertex_df_from_vertex_dict(
     to_be_df_dict, config_obj, trees_list, FULL_DF_PATH
 ):
-    print("Creating components dict.")
+    #print("Creating components dict.")
     try:
         components_dict = {
             tree: to_be_df_dict[tree]["component_list"] for tree in trees_list
@@ -192,7 +190,7 @@ def create_vertex_df_from_vertex_dict(
     balanced_h5_file = get_balanced_h5_path(config_obj, True) + trees_list[0]
     try:
         balanced_h5 = h5py.File(balanced_h5_file, "r")
-        print("Adding c0 pct (and outcomes if applicable).")
+        #print("Adding c0 pct (and outcomes if applicable).")
         vertex_df = add_c0_pct_and_outcomes(
             trees_list[0],
             balanced_h5,
@@ -202,7 +200,7 @@ def create_vertex_df_from_vertex_dict(
             config_obj["machine"],
         )
         pd.to_pickle(vertex_df, FULL_DF_PATH)
-        print("Done. Made vertex df of shape: ", vertex_df.shape)
+        #print("Done. Made vertex df of shape: ", vertex_df.shape)
     finally:
         balanced_h5.close()
     return vertex_df
@@ -247,7 +245,7 @@ def calc_weighted_status(
 ):
     status_list = []
     if not weighted_status_flag:
-        print("running without weighted status, tiebreak node is:", tiebreak_node)
+        #print("running without weighted status, tiebreak node is:", tiebreak_node)
         tiebreak_trigger = 0
         for node in component_df.index:
             component_weight = 0
@@ -274,7 +272,7 @@ def calc_weighted_status(
                             component_weight = 0
                 component_weight_total += component_weight
             status_list.append(100 * (component_weight_total / len(df_transpose.index)))
-        print("tiebreak triggered :", tiebreak_trigger / len(component_df.index), " times")
+        #print("tiebreak triggered :", tiebreak_trigger / len(component_df.index), " times")
 
         return status_list
 
@@ -310,21 +308,18 @@ def add_c0_pct_and_outcomes(
     mapping = list(balanced_h5["mapping_to_original"])
     df_dict_temp["Vert ID"] = [mapping[i] for i in component_df.index]
     assert len(mapping) == len(component_df.index)
-    print("ATTACHING OUTCOMES?")
+    #print("ATTACHING OUTCOMES?")
     if "tree_bias_score" in balanced_h5.attrs:
-        print("YES")
+        #print("YES")
         outcomes = list(balanced_h5["outcomes"])
         df_dict_temp["outcome"] = outcomes
         assert len(mapping) == len(outcomes)
-    else:
-        print(
-            "No bias score: Possibly a redflag? Dataset: ", balanced_h5.attrs["dataset"]
-        )
     df = pd.DataFrame(
         df_dict_temp
     )  ### creates dataframe with status, node ID, and outcomes
     TimerManager.stopTimerX(0)
     print_timing_output(
-        "GLOBAL_TIME: (hh:mm:ss.ms)", str(TimerManager.getTimerXElapsed(0)), output_type
+        "TOTAL_TIME: (hh:mm:ss.ms)", str(TimerManager.getTimerXElapsed(0)), output_type
     )
+    print("TOTAL_TIME: (hh:mm:ss.ms)", str(TimerManager.getTimerXElapsed(0)));
     return df

@@ -374,7 +374,7 @@ def bias_vs_c0_style(fig, axes, title, xlabel, ylabel):
 
 def postprocess_vertex_status_vs_id(config_obj):
     logging.getLogger("matplotlib").setLevel(logging.WARNING)
-    print("-------- Creating vertex_status_vs_id Plot --------")
+    #print("-------- Creating vertex_status_vs_id Plot --------")
     component_list_weight = True
     df = postprocess_vertex_df(config_obj, True)
     user_map_df, ignore = get_users_map(config_obj)
@@ -412,15 +412,15 @@ def postprocess_vertex_status_vs_id(config_obj):
 
 
 def postprocess_tree_bias_vs_c0(config_obj):
-    print("-------- Creating tree_bias_vs_c0 Plot --------")
+    #print("-------- Creating tree_bias_vs_c0 Plot --------")
     if config_obj["has_labels"]:
         df = postprocess_tree_df(config_obj, True)
         cols = ["tree_bias_score", "c0_pct", "pv_c0_pct", "pv_pct"]
         if not config_obj["has_labels"]:
-            print(
-                "This dataset has no labels, and therefore no bias measurement, and therefore can't plot bias vs c0: ",
-                config_obj["dataset"],
-            )
+        #    print(
+        #        "This dataset has no labels, and therefore no bias measurement, and therefore can't plot bias vs c0: ",
+        #        config_obj["dataset"],
+        #    )
             return None
         df = df[cols]
         fig, axes = bias_vs_c0_content(df)
@@ -442,7 +442,7 @@ def postprocess_tree_bias_vs_c0(config_obj):
         img_name = file_tag + "_bias.png"
         save_fig(fig, config_obj, img_name, df)
     else:
-        print(
-            "Warning: this dataset has no labels, so we can't create a bias vs c0 plot."
-        )
+        #print(
+        #    "Warning: this dataset has no labels, so we can't create a bias vs c0 plot."
+        #)
         return None

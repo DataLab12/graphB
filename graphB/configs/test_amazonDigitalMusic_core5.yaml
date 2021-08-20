@@ -24,7 +24,7 @@ tree_type: #  tree sampling options
   random: No
   breadth: Yes
   depth: No
-num_trees: 100 #  The number of trees you want to make
+num_trees: 10 #  The number of trees you want to make
 
 #######################################################################################################
 # POSTPROCESSING / ANALYSIS SETTINGS (Data --> Output Data):

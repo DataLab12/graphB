@@ -1,6 +1,8 @@
+import sys
 import numpy as np
 import pandas as pd
-from sys import argv
+
+from sys import argv, __stdout__
 from datetime import datetime, timedelta
 import os
 
@@ -81,7 +83,7 @@ def create_write_filename(outfiles):
     outfile = os.path.normpath(outfiles[0])
     split_dir = os.path.dirname(outfile).split(os.sep)
     write_dir = (
-        os.sep.join(split_dir[:-2]) + "/Output_Data/Timing/" + split_dir[-1] + "/"
+        os.sep.join(split_dir[:-2]) + "/Timing/" + split_dir[-1] + "/"
     )
     os.makedirs(write_dir, exist_ok=True)
     write_file = (
@@ -104,7 +106,7 @@ def create_timing_results(output_files, write_filename):
         "AVG_BALANCE_TIME",
         "SUM_TOTAL_BALANCE_TIME",
         "SUM_BALANCE_TIME",
-        "GLOBAL_TIME",
+        "TOTAL_TIME",
         "VERTEX_DF_TIME",
         "MATRIX_CREATE_TIME",
         "SYM_MATRIX_CREATE_TIME",
@@ -132,7 +134,7 @@ def create_timing_results(output_files, write_filename):
             "TOTAL_PREPROCESS_TIME": [],
             "TOTAL_PROCESS_TIME": [],
             "TOTAL_POSTPROCESS_TIME": [],
-            "GLOBAL_TIME": [],
+            "TOTAL_TIME": [],
             "VERTEX_DF_TIME": [],
             "CALC_STATUS_TIME": [],
             "MATRIX_CREATE_TIME": [],
@@ -162,7 +164,7 @@ def create_timing_results(output_files, write_filename):
 
         tree_keywords = convert_timedelta(tree_keywords)
         global_keywords = convert_timedelta(global_keywords)
-        global_keywords["GLOBAL_TIME"] = (
+        global_keywords["TOTAL_TIME"] = (
             global_keywords["TOTAL_PREPROCESS_TIME"][0]
             + global_keywords["TOTAL_PROCESS_TIME"][0]
             + global_keywords["TOTAL_POSTPROCESS_TIME"][0]
@@ -193,7 +195,7 @@ def create_timing_results(output_files, write_filename):
         total_series_seconds = pd.Series()
 
         FINAL_COLUMN_ORDER = [
-            "GLOBAL_TIME",
+            "TOTAL_TIME",
             "TOTAL_PREPROCESS_TIME",
             "TOTAL_PROCESS_TIME",
             "TOTAL_POSTPROCESS_TIME",
@@ -236,14 +238,21 @@ def create_timing_results(output_files, write_filename):
     total_df_seconds = total_df_seconds[FINAL_COLUMN_ORDER]
 
     if write_filename is None:
-        total_df_datetime.to_csv("timing_results_datetime.csv", encoding="utf-8")
-        total_df_seconds.to_csv("timing_results_seconds.csv", encoding="utf-8")
-    else:
-        total_df_datetime.to_csv(write_filename + "_datetime.csv", encoding="utf-8")
-        total_df_seconds.to_csv(write_filename + "_seconds.csv", encoding="utf-8")
+       write_filename = "timing_results"
+    
+   
+    total_df_datetime.to_csv(write_filename + "_datetime.csv", encoding="utf-8")
+    total_df_seconds.to_csv(write_filename + "_seconds.csv", encoding="utf-8")
 
-    print("wrote timing results csvs")
-
+    #Print the result to the console.   
+    sys.stdout = sys.__stdout__  
+    #print(total_df_seconds[total_df_seconds.columns[0]].to_string)
+    
+    print (write_filename,":")
+    val = total_df_seconds['TOTAL_TIME'].values[0]
+    num_trees = total_df_seconds['SUM_TREE_TIME'].values[0]/total_df_seconds['AVG_TREE_TIME'].values[0]
+    
+    print(val, "seconds for ", int(float(num_trees)), " spanning trees")
 
 if __name__ == "__main__":
 

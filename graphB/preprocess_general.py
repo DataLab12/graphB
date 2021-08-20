@@ -83,7 +83,7 @@ def create_full_h5(config_obj):
     num_connected_components, labels = sp.csgraph.connected_components(
         csr_adj_matrix, return_labels=True
     )  # returns a list of the connected components with each one given a label. i.e. 0,1,2, etc.
-    print("number of connected components: ", num_connected_components)
+    #print("number of connected components: ", num_connected_components)
     G = nx.from_scipy_sparse_matrix(csr_adj_matrix)
     connected_comps=list(G.subgraph(c).copy() for c in nx.connected_components(G))
 

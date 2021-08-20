@@ -43,7 +43,7 @@ def get_depth_first_tree(csr_adj_matrix, node_index):
     )
     start_node = degree_list[node_index]
     start_node = start_node[1]
-    print("start node is:", start_node)
+    #print("start node is:", start_node)
     depth_tree = csgraph.depth_first_tree(
         csr_adj_matrix, start_node
     )  # makes a tree from depth first search
@@ -58,7 +58,7 @@ def get_breadth_first_tree(csr_adj_matrix, node_index):
     )
     start_node = degree_list[node_index]
     start_node = start_node[1]
-    print("start node is:", start_node)
+    #print("start node is:", start_node)
     breadth_tree = csgraph.breadth_first_tree(
         csr_adj_matrix, start_node
     )  # makes a tree from breadth first search
@@ -353,7 +353,7 @@ def reverse_edges(csr_unbal_adj_matrix, list_of_edges_to_change):
         csr_bal_adj_matrix = csr_unbal_adj_matrix.value.copy()
     else:
         csr_bal_adj_matrix = csr_unbal_adj_matrix.copy()
-    print("Number of edges to change:", str(len(list_of_edges_to_change)))
+    #print("Number of edges to change:", str(len(list_of_edges_to_change)))
     for coord_triple in list_of_edges_to_change:
         reverse_edge(csr_bal_adj_matrix, coord_triple)
     return csr_bal_adj_matrix
@@ -386,13 +386,13 @@ def create_matrix_h5_file(g, csr_m):
 def write_csr_to_csv(csr_matrix, name):
     graph = csr_matrix.toarray()
     filename = name
-    print("length of graph array:", len(graph))
-    print("csr matrix array:", graph)
-    print("length of one row:", len(graph[0]))
+    #print("length of graph array:", len(graph))
+    #print("csr matrix array:", graph)
+    #print("length of one row:", len(graph[0]))
     with open(filename, "w") as writefile:
         writer = csv.writer(writefile)
         writer.writerow(["From", "To", "Weight"])
-        print("WRITING CSR MATRIX TO CSV AT: ", filename)
+        #print("WRITING CSR MATRIX TO CSV AT: ", filename)
         for (m, n), value in np.ndenumerate(graph):
             if value != 0:
                 writer.writerow([m, n, value])
@@ -422,7 +422,7 @@ def write_component_stats(
         ]
         f.create_dataset("weighted_component_list", data=component_list_with_tuples)
     else:
-        print("component list only contains one component")
+        #print("component list only contains one component")
         f.attrs["total_vertex_size"] = int(counts[0])
         assert int(counts[0] == csr_bal_adj_matrix.shape[0])
         assert int(counts[0] == csr_st_adj_matrix.shape[0])
@@ -479,18 +479,6 @@ def write_balanced_h5(
     tree_name,
 ):
     bal_adj_path = get_balanced_h5_path(config_obj) + tree_name + ".h5"
-    print(
-        "Writing balanced h5: ",
-        "(",
-        tree_name,
-        ", ",
-        config_obj["dataset"],
-        ", ",
-        config_obj["data_subset_type"],
-        ", ",
-        config_obj["matrix_name"],
-        ") ",
-    )
     try:
         output_type = config_obj["machine"]
         start_component_list = datetime.now()
@@ -528,23 +516,7 @@ def write_balanced_h5(
                 "has_labels"
             ]:  ## wrties c0 and c1 wins and losses to existing h5
                 write_outcome_stats(f, config_obj, csr_bal_adj_matrix, component_list)
-            print(
-                "Wrote balanced h5: ",
-                "(",
-                tree_name,
-                ", ",
-                config_obj["dataset"],
-                ", ",
-                config_obj["data_subset_type"],
-                ", ",
-                config_obj["matrix_name"],
-                ")\n",
-            )
             f.close()
-        else:
-            print(
-                "Component list had only one component. No Agreeable Minority exists for this tree. Tree not saved to h5."
-            )
     except:
         print("Error writing balanced h5")
 
@@ -818,15 +790,8 @@ def get_mapping_to_original(config_obj, local_override=False):
 
 # Called in process_locally
 def broadcast_dump(self, value, f):
-    print(
-        "Dumping file. value / file size: ",
-        sys.getsizeof(value),
-        " / ",
-        sys.getsizeof(f),
-    )
     pickle.dump(value, f, 4)
     f.close()
-    print("~~~~~~~~~~~ DUMPED! ~~~~~~~~~~~~")
     return f.name
 
 
@@ -837,7 +802,7 @@ def process_locally(config_obj):
         [item for item in config_obj["tree_type"] if config_obj["tree_type"][item]][0]
     )
     tree_names_to_create = generate_tree_names(config_obj)
-    print("Creating", len(tree_names_to_create), tree_type, "trees.")
+    #print("Creating", len(tree_names_to_create), tree_type, "trees.")
     balanced_tuple_list = None
     unbalanced_csr_adj_matrix = get_full_csr_adj(config_obj, True)
     mapping_to_original = get_mapping_to_original(config_obj, True)
@@ -846,7 +811,7 @@ def process_locally(config_obj):
     for tree_name in tree_names_to_create:
         random_weights_dict[tree_name] = np.random.uniform(0, 1, num_edges_in_graph)
     if config_obj["parallelism"] == "spark":  # Use Spark
-        print("Paralellism: Spark")
+        #print("Paralellism: Spark")
         from pyspark import SparkContext, SparkConf, broadcast
 
         # https://datascience.stackexchange.com/questions/8549/how-do-i-set-get-heap-size-for-spark-via-python-notebook
@@ -865,20 +830,6 @@ def process_locally(config_obj):
         sc = SparkContext(conf=conf)
 
         broadcast.Broadcast.dump = broadcast_dump
-        print(
-            "unbalanced_csr_adj_matrix edges / vertices: ",
-            num_edges_in_graph,
-            " / ",
-            unbalanced_csr_adj_matrix.shape[0],
-        )
-        print(
-            "Size of unbalanced_csr_adj_matrix in bytes: ",
-            sys.getsizeof(unbalanced_csr_adj_matrix),
-        )
-        print(
-            "Size of unbalanced_csr_adj_matrix in gigabytes: ",
-            sys.getsizeof(unbalanced_csr_adj_matrix) / (1024 * 1024 * 1024),
-        )
         tree_names_to_create_rdd = sc.parallelize(tree_names_to_create)
         ### construct a list containing all the node indices for breadth first trees. If length of total nodes
         ### in graph is less than number of trees requested, loop around the indices and repeat the breadth trees
@@ -905,7 +856,7 @@ def process_locally(config_obj):
         )
         balanced_tuple_list = balanced_tuple_list.collect()
     elif config_obj["parallelism"] == "serial":
-        print("Paralellism: Serial")
+        #print("Paralellism: Serial")
         balanced_tuple_list = list()
         node_index = 0
         ### increment node_index for breadth first tree generation. Makes breadth first trees run starting
@@ -913,10 +864,10 @@ def process_locally(config_obj):
         for tree_name in tree_names_to_create:
             if node_index == len(mapping_to_original):
                 node_index = 0
-                print(
-                    "NODE INDEX RESET, THERE ARE LESS NODES THAN NUMBER OF BREADTH TREES REQUESTED"
-                )
-            print("Creating tree number: ", tree_names_to_create.index(tree_name))
+                #print(
+                #    "NODE INDEX RESET, THERE ARE LESS NODES THAN NUMBER OF BREADTH TREES REQUESTED"
+                #)
+            #print("Creating tree number: ", tree_names_to_create.index(tree_name))
             balanced_tuple_list.append(
                 balance_graph(
                     unbalanced_csr_adj_matrix,
@@ -928,12 +879,6 @@ def process_locally(config_obj):
                 )
             )
             node_index += 1
-    print("----------")
-    if len(balanced_tuple_list) > 0:
-        print("Trees made: ", len(balanced_tuple_list))
-    else:
-        print("No trees made.")
-    print("----------")
     print_timing_output(
         "TOTAL_PROCESS_TIME: (hh:mm:ss.ms)", datetime.now() - process_start, output_type
     )
@@ -947,7 +892,7 @@ def submit_process_LEAP_job(config_obj, preprocess_jobID):
     component_no = config_obj["component_no"]
     LEAP_output = None
     if config_obj["parallelism"] == "spark":
-        print("Submitting process job on LEAP using Spark")
+        #print("Submitting process job on LEAP using Spark")
         LEAP_output = subprocess.run(
             [
                 "./wrapper_process_general_spark.sh",
@@ -960,7 +905,7 @@ def submit_process_LEAP_job(config_obj, preprocess_jobID):
             stdout=subprocess.PIPE,
         ).stdout.decode("utf-8")
     else:
-        print("Submitting process job on LEAP (non-Spark).")
+        #print("Submitting process job on LEAP (non-Spark).")
         LEAP_output = subprocess.run(
             [
                 "./wrapper_process_general.sh",
@@ -972,13 +917,13 @@ def submit_process_LEAP_job(config_obj, preprocess_jobID):
             ],
             stdout=subprocess.PIPE,
         ).stdout.decode("utf-8")
-    print("submit_process_LEAP_job output: ", LEAP_output)
+    #print("submit_process_LEAP_job output: ", LEAP_output)
     job_ID = int(LEAP_output.split()[-1])
     return job_ID
 
 
 if __name__ == "__main__":
-    print("Running process main with args: ", sys.argv)
+    #print("Running process main with args: ", sys.argv)
     dataset = str(sys.argv[1])
     data_subset_type = str(sys.argv[2])
     matrix_name = str(sys.argv[3])

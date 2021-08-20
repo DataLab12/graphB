@@ -1,3 +1,10 @@
+#  Do a testRun to make sure it all works, then do a run on the data from the paper 
+	```
+     >>source testRun.sh
+     >>source testRun.sh 	 
+	```
+   The example is set to run 10 trees, 1000 trees from the paper would take too long 
+
 # graphB 
 
 **graphB** algorithmm, short for **graph B**alancing, implements graph frustration cloud and resulting graph measures, as presented in this [paper](https://arxiv.org/abs/2009.07776).  

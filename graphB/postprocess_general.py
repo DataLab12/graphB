@@ -23,11 +23,11 @@ from make_timing_dfs import create_write_filename, create_timing_results
 def postprocess_locally(config_obj):
     postprocess_start = datetime.now()
     output_type = config_obj["machine"]
-    print("-------------------- Config Object --------------------")
-    print(config_obj)
-    print("-------------------- End Config Object --------------------")
+    #print("-------------------- Config Object --------------------")
+    #print(config_obj)
+    #print("-------------------- End Config Object --------------------")
     if config_obj["postprocess"]:
-        print("Creating at least one thing.")
+        #print("Creating at least one thing.")
         if config_obj["dataframes"]["vertex_df"]:
             postprocess_vertex_df(config_obj)
         if config_obj["plots"]["tree_bias_vs_c0"]:
@@ -77,7 +77,7 @@ def submit_postprocess_LEAP_job(config_obj, process_jobID):
             stdout=subprocess.PIPE,
         ).stdout.decode("utf-8")
     else:
-        print("Submitting postprocess job on LEAP (non-Spark).")
+        #print("Submitting postprocess job on LEAP (non-Spark).")
         LEAP_output = subprocess.run(
             [
                 "./wrapper_postprocess_general.sh",
@@ -97,7 +97,7 @@ def submit_postprocess_LEAP_job(config_obj, process_jobID):
 
 
 if __name__ == "__main__":
-    print("Running postprocess main with args: ", sys.argv)
+    #print("Running postprocess main with args: ", sys.argv)
     dataset = str(sys.argv[1])
     data_subset_type = str(sys.argv[2])
     matrix_name = str(sys.argv[3])

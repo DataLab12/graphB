@@ -35,7 +35,7 @@ def get_output_file_path(config_obj):
     ) = get_common_config_details(config_obj)
     machine = config_obj["machine"]
     log_directory = (
-        "../data-" + dataset + "/Logfiles/" + data_subset_type + "_" + matrix_name + "/"
+        "../data-" + dataset + "/Output_Data/Logfiles/" + data_subset_type + "_" + matrix_name + "/"
     )
     create_if_not_exists(log_directory)
     output_path = (
@@ -94,7 +94,7 @@ def get_config_path(dataset, data_subset_type, matrix_name):
 def get_yaml_config_obj_by_key_tuple(dataset, data_subset_type, matrix_name):
     # Example parameter set: "example1", "regular", "regular"
     config_path = get_config_path(dataset, data_subset_type, matrix_name)
-    print("config_path: ", config_path)
+    #print("config_path: ", config_path)
     config_obj = None
     with open(config_path, "r") as stream:
         try:
@@ -108,14 +108,14 @@ def get_full_h5_path(config_obj, local_override=False):
     dataset = config_obj["dataset"]
     parent_dir = None
     if config_obj["machine"] == "current":
-        print("Machine: current")
+        #print("Machine: current")
         parent_dir = str(Path(__file__).parents[1]) + "/data-" + dataset + "/Data/"
     elif config_obj["machine"] == "LEAP":
         if config_obj["parallelism"] == "spark" and not local_override:
-            print("Machine: LEAP, parallelism: Spark (no override)")
+            #print("Machine: LEAP, parallelism: Spark (no override)")
             parent_dir = str(Path(__file__).parents[1]) + "/data-" + dataset + "/Data/"
         else:
-            print("Machine: LEAP, parallelism: Not spark (or override)")
+            #print("Machine: LEAP, parallelism: Not spark (or override)")
             parent_dir = str(Path(__file__).parents[1]) + "/data-" + dataset + "/Data/"
     H5_PATH = (
         parent_dir
@@ -124,7 +124,7 @@ def get_full_h5_path(config_obj, local_override=False):
         + config_obj["matrix_name"]
         + "/"
     )
-    print("Path: ", H5_PATH)
+    #print("Path: ", H5_PATH)
     return H5_PATH
 
 
@@ -194,7 +194,7 @@ def get_full_csr_adj(config_obj, local_override=False):
         + ".h5"
     )
     mat = None
-    print("Getting full sym csr adj from: ", matrix_file_path)
+    #print("Getting full sym csr adj from: ", matrix_file_path)
     f = h5py.File(matrix_file_path, "r")
     try:
         mat = csr_matrix(
@@ -270,5 +270,5 @@ def get_postprocess_folder_general(config_obj):
 def print_timing_output(time_label, timestamp, output_type):
     if output_type == "current":
         logging.info(time_label + "%s" % timestamp)
-    elif output_type == "LEAP":
-        print(time_label + " ", timestamp)
+    #elif output_type == "LEAP":
+        #print(time_label + " ", timestamp)
