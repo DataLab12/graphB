@@ -35,7 +35,7 @@ def get_output_file_path(config_obj):
     ) = get_common_config_details(config_obj)
     machine = config_obj["machine"]
     log_directory = (
-        "../data-" + dataset + "/Output_Data/Logfiles/" + data_subset_type + "_" + matrix_name + "/"
+        "../data-" + dataset + "/Output_Data/" + data_subset_type + "_" + matrix_name + "/"
     )
     create_if_not_exists(log_directory)
     output_path = (
@@ -246,7 +246,7 @@ def get_postprocess_folder_general(config_obj):
             str(Path(__file__).parents[1])
             + "/data-"
             + dataset
-            + "/Output_Data/graphB/"
+            + "/Output_Data/"
             + data_subset_type
             + "_"
             + matrix_name
@@ -257,7 +257,7 @@ def get_postprocess_folder_general(config_obj):
             str(Path(__file__).parents[3])
             + "/data-"
             + dataset
-            + "/Output_Data/graphB/"
+            + "/Output_Data/"
             + data_subset_type
             + "_"
             + matrix_name

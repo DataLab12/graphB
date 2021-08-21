@@ -34,19 +34,19 @@ Martin Burtscher's team scaled the discovery and balancing of fundamental cycles
 
    a. open terminal in graphB repo (where it is locally):
 ```
->>cd <DIR>/graphB/
+>>cd <DIR>/graphB/graphB
 ```
    b. Based on OS, create new environment 
 ```
->>conda env create -f graphB/env/win_env.yml //if Windows
+>>conda env create -f env/win_env.yml //if Windows
 ```
 or 
 ```
->>conda env create -f graphB/env/linux_env.yml //if Linux
+>>conda env create -f env/linux_env.yml //if Linux
 ```
 or 
 ```
->>conda env create -f graphB/env/mac_env.yml //if Linux
+>>conda env create -f env/mac_env.yml //if Linux
 ```
 make sure all the packages are installed. If succesfull, this is the terminal output:
 ```
@@ -62,16 +62,14 @@ done
 >> conda activate graphB
 ```
    
-4. Run 
- [explanation](configs/README.md)
+4. Setup configs folder (optional - currently set for data-test)
+* copy folder **configs_template**, rename it to **configs** 
+* repo data-highland_tribes should be at the same level at graphB/
+* configs file options and hierarchy [explanation](configs_template/README.md)
 ```
->>source testRun.sh
+>>python run.py
+>>python run.py 0
 ```
-Terminal output shows the totla time of execution in seconds and number of spanning trees used in the experiment 
-```
->>source run.sh
-```
-
 5. Result Analysis 
 * To view results go to [data-test/Output_Data/](data-test/Output_Data/) folder. 
 

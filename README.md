@@ -1,7 +1,7 @@
 #  Do a testRun to make sure it all works, then do a run on the data from the paper 
 	```
      >>source testRun.sh
-     >>source testRun.sh 	 
+     >>source run.sh 	 
 	```
    The example is set to run 10 trees, 1000 trees from the paper would take too long 
 

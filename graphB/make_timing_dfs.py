@@ -83,7 +83,7 @@ def create_write_filename(outfiles):
     outfile = os.path.normpath(outfiles[0])
     split_dir = os.path.dirname(outfile).split(os.sep)
     write_dir = (
-        os.sep.join(split_dir[:-2]) + "/Timing/" + split_dir[-1] + "/"
+        os.sep.join(split_dir[:-2]) + "/Output_Data/" + split_dir[-1] + "/"
     )
     os.makedirs(write_dir, exist_ok=True)
     write_file = (
@@ -179,11 +179,16 @@ def create_timing_results(output_files, write_filename):
         for key in tree_keywords:
             if len(tree_keywords[key]) > max_length:
                 max_length = len(tree_keywords[key])
+        print("Len is ", max_length)
+        
         for key in tree_keywords:
             mean = sum(tree_keywords[key], timedelta()) / len(tree_keywords[key])
             if len(tree_keywords[key]) < max_length:
+                #print("Len is ", max_length, " current len for ",key, " is ",len(tree_keywords[key]) )
                 tree_keywords.setdefault(key, []).append(mean)
-
+                
+                
+        # this causes a big issue here         
         tree_sums = pd.DataFrame(tree_keywords).sum()
         tree_series = pd.DataFrame(tree_keywords).mean()
         global_series = pd.DataFrame(global_keywords).mean()

@@ -35,7 +35,7 @@ dataframes:
   vertex_df: Yes # Need to make this to generate status
 plots:
   tree_bias_vs_c0: No # This option works if the dataset has outcomes.
-  vertex_status_vs_id: Yes # This option is what outputs the status vs. id csvs and pngs
+  vertex_status_vs_id: No # This option is what outputs the status vs. id csvs and pngs
 # postprocessing options
 tiebreak_node: None #  OPTIONS: <integer corresponding to node> or <None>
 weighted_status: No #  If weighted status values based on the size of the majority/minority i.e. if majority was 70%, nodes will get assigned a status value of .7 for each time they are in the majority. This option makes average status converge to .5. Was put in as proof of concept.
