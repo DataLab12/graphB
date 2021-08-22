@@ -1,17 +1,13 @@
 cd graphB
 
-conda activate graphB 
+python -W ignore run.py
 
-python run.py
+python -W ignore run.py 0
 
-python run.py 0
+python -W ignore run.py 1
 
-python run.py 1
+python -W ignore run.py 2
 
-python run.py 2
-
-python run.py 4 
-
-conda deactivate
+python -W ignore run.py 3 
 
 cd ..

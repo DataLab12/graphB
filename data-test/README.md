@@ -1,3 +1,69 @@
+## Timing Analysis of the Code
+
+Detailed performance analysis of the code on several datasets [TIMING](TIMING.md)
+
+## Implementation and Setup Notes 
+
+1. Install Anaconda. Make sure all packages are installed.  If Anaconda is installed follow the steps below: 
+
+    a. open terminal window as Admin (Windows) and make sure all file permissions are set by sudo on Linux.
+	```
+     >>cd <_DIR>/graphB
+	 >>conda update -n base -c defaults conda 
+	```
+    b. remove old packages and tarballs
+	```
+    >>conda  clean -p -t
+	```
+    c. remove old environments
+	```
+    >>conda env list
+    >>conda env remove –name cam 
+	```
+
+2. Pull latest graphB from github.com/DataLab12/graphB and follow instructions. 
+
+   a. open terminal in graphB repo (where it is locally):
+```
+>>cd <_DIR>/graphB
+```
+   b. Based on OS, create new environment 
+```
+>>conda env create -f env/win_env.yml //if Windows
+```
+or 
+```
+>>conda env create -f env/linux_env.yml //if Linux
+```
+or 
+```
+>>conda env create -f env/mac_env.yml //if Linux
+```
+make sure all the packages are installed. If succesfull, this is the terminal output:
+```
+done
+#
+# To activate this environment, use
+#
+#     $ conda activate graphB
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+>> conda activate graphB
+```
+   
+4. Setup configs folder (optional - currently set for data-test)
+* copy folder **configs_template**, rename it to **configs** 
+* repo data-highland_tribes should be at the same level at graphB/
+* configs file options and hierarchy [explanation](configs_template/README.md)
+```
+>>python run.py
+>>python run.py 0
+```
+5. Result Analysis 
+* To view results go to [data-test/Output_Data/](data-test/Output_Data/) folder. 
+
 # Dataset Notations, Format, and Example
 
 | Example    | Figure     |  Data     |

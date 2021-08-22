@@ -61,7 +61,7 @@ def get_all_config_file_options():
 
 
 def parse_config_path(config_path):
-    # Example config_path: '0.yaml'
+    # Example config_path: '/Users/jm/graphB/configs/example1/regular/regular/0.yaml'
     key_list = config_path.split(sep)[-1].split("_")
     dataset = key_list[0]
     data_subset_type = key_list[1]
