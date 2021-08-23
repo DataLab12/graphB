@@ -1,0 +1,18 @@
+ # Wiki
+http://snap.stanford.edu/data/wikiElec.ElecBs3.txt.gz
+
+# Amazon
+
+All amazon files: 
+https://snap.stanford.edu/data/amazon/productGraph/categoryFiles/
+
+#Amazon Video core5
+http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Amazon_Instant_Video_5.json.gz
+
+#Amazon Musical Instruments core 5
+http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Musical_Instruments_5.json.gz
+
+#Amazon Digital Music core 5
+http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Digital_Music_5.json.gz
+
+
