@@ -49,6 +49,5 @@ Please cite this publication:  Rusnak, L., Tešić, J. [_Characterizing attitudi
 * Timing Analysis [experiment](graphB/TIMING.md)
 * [Detailed timing experiment](data-test/TIMING.md)
 * [Data Format and code run](data-test/README.md)
-  
-  
+    
 [Data Lab @ TXST](DataLab12.github.io)
