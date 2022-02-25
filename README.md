@@ -22,7 +22,7 @@
 
 # Citation 
 
-Please cite graphB 2020 publication if it helps your research:  Rusnak, L., Tešić, J. [_Characterizing attitudinal network graphs through frustration cloud_](https://link.springer.com/article/10.1007/s10618-021-00795-z). Data Min Knowl Disc 35, 2498–2539 (2021). 
+Please cite this publication if it helps your research:  Rusnak, L., Tešić, J. [_Characterizing attitudinal network graphs through frustration cloud_](https://link.springer.com/article/10.1007/s10618-021-00795-z). Data Min Knowl Disc 35, 2498–2539 (2021). 
 
 BibTeX entry: 
 
